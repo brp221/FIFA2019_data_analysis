@@ -32,7 +32,7 @@ fifa_19$heightClass <- as.character(heightClass)
 fifa_19_height <- fifa_19[order(fifa_19$heightClass),]
 library(ggplot2)
 ggplot(data = fifa_19_height,aes(x=heightClass))+
-  geom_bar(width = 0.5)+
+  geom_bar(width = 0.85)+
   xlab("Heigth")+
   ylab("Count")
 
@@ -65,34 +65,17 @@ for (i in 1:nrow(fifa_19)){
 } 
 fifa_19$weigthClass <- as.character(weigthClass)
 
+ggplot(data = fifa_19, aes(Weight))+
+  geom_bar(width = 0.99)+
+  xlab("weight class")+
+  ylab("Count")
+
+
 ggplot(data = fifa_19, aes(weigthClass))+
   geom_bar(width = 0.75)+
   xlab("weight class")+
   ylab("Count")
 
 
-
-
-
-
-
-
-#Task #6 or whatever: Nationality(top 10 w best 300 players)
-fifa_19_nationality<-filter(fifa_19,Nationality=="Argentina"|Nationality=="Brazil"|Nationality=="France"|
-                              Nationality=="Germany"|Nationality=="Belgium"|Nationality=="Portugal"|
-                              Nationality=="Colombia"|Nationality=="Uruguay"|Nationality=="Serbia"|Nationality=="Greece")
-
-ggplot(fifa_19_nationality[1:500,],aes(Nationality,TechniqueScore))+
-  geom_bar(stat = "summary",fun.y="mean")+
-  ggtitle("AVERAGE TECHNIQUE BY NATIONALITY")
-
-ggplot(fifa_19_nationality[1:500,],aes(Nationality,AthleticScore))+
-  geom_bar(stat = "summary",fun.y="mean")+
-  ggtitle("AVERAGE TECHNIQUE BY NATIONALITY")
-
-
-ggplot(fifa_19_nationality[1:200,],aes(Nationality,Stamina))+
-  geom_bar(stat = "summary",fun.y="mean")+
-  ggtitle("AVERAGE TECHNIQUE BY NATIONALITY")
 
 

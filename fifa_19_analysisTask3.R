@@ -40,7 +40,7 @@ fifa_19_no_gk$TechniqueScore <- as.integer(TechniqueScore)
 
 ggplot(data = fifa_19_no_gk[1:300,],aes(x= Strength, y = TechniqueScore))+
   geom_point()+
-  ggtitle("Technique vs Strength")+
+  ggtitle("Technique vs Strength (Filtered GKs-Outliers)")+
   geom_smooth(method="lm") 
 
 tapply(fifa_19_no_gk$TechniqueScore[1:250],fifa_19_no_gk$Position[1:250],mean)

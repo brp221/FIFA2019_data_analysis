@@ -11,20 +11,43 @@ normal_subset<-filter(fifa_19,fifa_19$Body.Type=="Normal")
 #Task 2 : Correlation between weight and (acceleration, sprintSpeed, Agility, Balance, Stamina) for the 1st 250 players
 #need to exclude goalkeepers
 fifa_19_no_gk <- filter(fifa_19,fifa_19$Position != "GK")
-stamina_weight_corr<-ggplot(fifa_19_no_gk[1:250,], aes(x=Weight, y=Stamina)) + geom_point()+geom_smooth(method="lm")  # set se=FALSE to turnoff confidence bands
-plot(stamina_weight_corr)
 
-acc_weight_corr<-ggplot(fifa_19_no_gk[1:250,], aes(x=Weight, y=Acceleration)) + geom_point()+geom_smooth(method="lm")  # set se=FALSE to turnoff confidence bands
-plot(acc_weight_corr)
+#turning weight into numeric
+lbs_removal<-function(weight){
+  str_remove(weight,"lbs")}
+Weight<-NULL
+for(i in 1:nrow(fifa_19)){
+  Weight <-c(Weight,lbs_removal(fifa_19[i,"Weight"]))
+}
+fifa_19$Weight <- as.integer(Weight)
 
-sprint_weight_corr<-ggplot(fifa_19_no_gk[1:250,], aes(x=Weight, y=SprintSpeed)) + geom_point()+geom_smooth(method="lm")  # set se=FALSE to turnoff confidence bands
-plot(sprint_weight_corr)
 
-strngth_weight_corr<-ggplot(fifa_19_no_gk[1:250,], aes(x=Weight, y=Strength)) + geom_point()+geom_smooth(method="lm")  # set se=FALSE to turnoff confidence bands
-plot(strngth_weight_corr)
+ggplot(fifa_19_no_gk[1:250,], aes(x=Weight, y=Stamina)) + 
+geom_point()+
+geom_smooth(method="lm")  # set se=FALSE to turnoff confidence bands
 
-balnce_weight_corr<-ggplot(fifa_19_no_gk[1:250,], aes(x=Weight, y=Balance)) + geom_point()+geom_smooth(method="lm")  # set se=FALSE to turnoff confidence bands
-plot(balnce_weight_corr)
+
+
+ggplot(fifa_19_no_gk[1:250,], aes(x=Weight, y=Acceleration)) + 
+geom_point()+
+geom_smooth(method="lm")  # set se=FALSE to turnoff confidence bands
+
+
+ggplot(fifa_19_no_gk[1:250,], aes(x=Weight, y=SprintSpeed)) + 
+geom_point()+
+geom_smooth(method="lm")  # set se=FALSE to turnoff confidence bands
+
+
+ggplot(fifa_19_no_gk[1:250,], aes(x=Weight, y=Strength)) + 
+geom_point()+
+ggtitle("Weight vs Strength")+
+geom_smooth(method="lm")  # set se=FALSE to turnoff confidence bands
+
+
+ggplot(fifa_19_no_gk[1:250,], aes(x=Weight, y=Balance)) + 
+geom_point()+
+ggtitle("Weight vs Balance")+
+geom_smooth(method="lm")  
 
 
 # Aggregations Against Body Type
